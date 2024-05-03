@@ -1,0 +1,215 @@
+/* Cuerpo */
+.cuerpo {
+    height: 95%;
+    width: 95%;
+    text-align: center;
+    margin: auto;
+}
+
+/* Titulos */
+.titulo {
+    color: white;
+    height: 50px;
+    text-align: center;
+    border-top: 20px;
+    border-bottom: 1px solid white;
+}
+
+/* Navegacion */
+.navegacion {
+    display: flex;
+    font-size: 17px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    border-bottom: 20px;
+}
+
+.boton {
+    border-radius: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    padding: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+ul a {
+    padding: 10px;
+}
+
+ul a:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.89);
+}
+
+/* Contenido */
+.contenido {
+    text-align: center;
+    color: white;
+}
+
+aside {
+    float: left;
+    width: 400px;
+}
+
+.explicacion2 {
+    width: 800px;
+    float: right;
+}
+
+main {
+    float: right;
+    float: bottom;
+}
+
+.parrafo {
+    border-top: 1px;
+    border-top: 2px;
+}
+
+.elemento {
+    border-top: 2px;
+    border-bottom: 1px;
+}
+
+/* Footer */
+.footer {
+    background-color: black;
+    color: white;
+}
+
+/* Navegacion */
+.Navegacion {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-bottom: 20px;
+}
+
+.navegadores {
+    border-top: 8px;
+}
+
+.titulo {
+    color: white;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li:not(:last-child) {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+nav ul li a:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.89);
+}
+
+/* Buscador */
+.buscador {
+    color: white;
+    text-decoration: none;
+}
+
+.buscador img {
+    margin-right: 10px;
+}
+
+/* Perfil */
+.container {
+    max-width: 800px;
+    margin: auto;
+    align-items: center;
+}
+
+.tabla {
+    margin-top: 20px;
+}
+
+.tabla table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla th {
+    background-color: lightblue;
+}
+
+.crud {
+    color: white;
+    background-color: red;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.crud:hover {
+    background-color: rgb(145, 27, 27);
+}
+
+/* Bodega */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.filtro {
+    margin-top: 20px;
+}
+
+.filtro label,
+.filtro select,
+.filtro button {
+    margin-right: 10px;
+}
+
+.resultados {
+    margin-top: 20px;
+}
+
+.resultados table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.resultados th,
+.resultados td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.resultados th {
+    background-color: #f2f2f2;
+}

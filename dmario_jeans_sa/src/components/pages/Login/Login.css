@@ -1,0 +1,111 @@
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px; /* Reducir el margen superior del contenedor principal */
+    width: 600px;
+    background: white;
+    padding-bottom: 30px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 10px; /* Reducir el margen superior del título */
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 10px; /* Reducir el margen superior de los elementos dentro de .header */
+}
+
+.text {
+    color: black;
+    font-size: 38px;
+    font-weight: 600;
+}
+
+.underline {
+    width: 100px;
+    height: 6px;
+    background: lightblue;
+    border-radius: 9px;
+}
+
+.inputs {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 80px;
+    background-color: lightslategray;
+    border-radius: 6px;
+}
+
+.input img {
+    margin: 0px 30px;
+}
+
+.input input {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 19px;
+}
+
+.forgot-password {
+    padding-left: 62px;
+    margin-top: 20px; /* Reducir el margen superior de la sección "olvidé mi contraseña" */
+    color: black;
+    font-size: 18px;
+}
+
+.forgot-password span {
+    text-align: center;
+    align-items: center;
+    color: #2980b9;
+    cursor: pointer;
+}
+
+.submit-container {
+    display: flex;
+    gap: 20px; /* Reducir el espacio entre los botones de envío */
+    margin: 40px auto; /* Reducir el margen superior del contenedor de botones de envío */
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    color: #fff;
+    background: #2980b9;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.gray {
+    background: #eaeaea;
+    color: #676767;
+}

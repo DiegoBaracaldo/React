@@ -1,0 +1,12 @@
+Buenas Tardes,
+las localizaciones de todos los achivos para verlos en pantalla son:
+1. /login
+2. /editarperfil
+3. /bodega
+4. /diseños
+
+ejemplo de uso dentro de la prueba:
+local3000/login
+local3000/editarperfil
+local3000/bodega
+local3000/diseños
