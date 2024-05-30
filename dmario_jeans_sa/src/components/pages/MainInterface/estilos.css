@@ -1,93 +1,23 @@
-/* Cuerpo */
-.cuerpo {
-    height: 95%;
-    width: 95%;
-    text-align: center;
+/* Estilos generales */
+*{
+    padding: 0;
+    margin: 0;
+}
+.container {
+    max-width: 1000px;
     margin: auto;
+    padding: 30px;
 }
 
-/* Titulos */
 .titulo {
     color: white;
-    height: 50px;
     text-align: center;
-    border-top: 20px;
-    border-bottom: 1px solid white;
 }
 
-/* Navegacion */
-.navegacion {
-    display: flex;
-    font-size: 17px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 20px;
-    border-bottom: 20px;
-}
+/* Estilos de navegación */
 
-.boton {
-    border-radius: 5px;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-    padding: 20px;
-}
-
-ul {
-    list-style: none;
-}
-
-ul a {
-    padding: 10px;
-}
-
-ul a:hover {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.89);
-}
-
-/* Contenido */
-.contenido {
-    text-align: center;
-    color: white;
-}
-
-aside {
-    float: left;
-    width: 400px;
-}
-
-.explicacion2 {
-    width: 800px;
-    float: right;
-}
-
-main {
-    float: right;
-    float: bottom;
-}
-
-.parrafo {
-    border-top: 1px;
-    border-top: 2px;
-}
-
-.elemento {
-    border-top: 2px;
-    border-bottom: 1px;
-}
-
-/* Footer */
-.footer {
-    background-color: black;
-    color: white;
-}
-
-/* Navegacion */
 .Navegacion {
     display: flex;
-    text-align: center;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
@@ -95,74 +25,34 @@ main {
     border-bottom: 20px;
 }
 
-.navegadores {
-    border-top: 8px;
-}
-
-.titulo {
-    color: white;
-    text-align: center;
-}
-
-nav ul {
+.Navegacion ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-nav ul li {
+.Navegacion ul li {
     display: inline;
-}
-
-nav ul li:not(:last-child) {
     margin-right: 20px;
 }
 
-nav ul li a {
+.Navegacion ul li a {
     color: white;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: border-bottom 0.3s ease;
 }
 
-nav ul li a:hover {
+.Navegacion ul li a:hover {
     border-bottom: 2px solid rgba(255, 255, 255, 0.89);
 }
 
-/* Buscador */
-.buscador {
-    color: white;
-    text-decoration: none;
-}
+/* Estilos de formulario y botones */
 
-.buscador img {
+.filtro label,
+.filtro select,
+.filtro button {
     margin-right: 10px;
-}
-
-/* Perfil */
-.container {
-    max-width: 800px;
-    margin: auto;
-    align-items: center;
-}
-
-.tabla {
-    margin-top: 20px;
-}
-
-.tabla table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tabla th, .tabla td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.tabla th {
-    background-color: lightblue;
 }
 
 .crud {
@@ -178,21 +68,7 @@ nav ul li a:hover {
     background-color: rgb(145, 27, 27);
 }
 
-/* Bodega */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.filtro {
-    margin-top: 20px;
-}
-
-.filtro label,
-.filtro select,
-.filtro button {
-    margin-right: 10px;
-}
+/* Estilos de resultados de búsqueda */
 
 .resultados {
     margin-top: 20px;
@@ -212,4 +88,102 @@ nav ul li a:hover {
 
 .resultados th {
     background-color: #f2f2f2;
+}
+
+/* Estilos específicos de cada página */
+
+/* Bodega */
+.bodega {
+    margin-top: 20px;
+}
+
+/* Diseños */
+.diseños {
+    margin-top: 20px;
+}
+
+/* Editar perfil */
+.editar-perfil {
+    margin-top: 20px;
+}
+
+/* Estilos adicionales */
+
+.edit-button {
+    background-color: rgba(0, 162, 255, 0.658); 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.submit {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.identificador {
+    text-align: center; 
+}
+
+/* Estilos de filtro */
+
+.filtro,
+.filtro_ingreso {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 10px; 
+    padding: 10px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 19px;
+}
+
+.filtro label,
+.filtro_ingreso label {
+    margin-right: 10px; 
+}
+
+.filtro input, 
+.filtro select, 
+.filtro button,
+.filtro_ingreso input,
+.filtro_ingreso select,
+.filtro_ingreso button {
+    flex: 1; 
+    padding: 5px; 
+}
+
+.filtro button,
+.filtro_ingreso button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.filtro button img,
+.filtro_ingreso button img {
+    margin-right: 5px; 
 }

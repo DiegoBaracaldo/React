@@ -79,6 +79,7 @@
 }
 
 .forgot-password span {
+    display: flexbox;
     text-align: center;
     align-items: center;
     color: #2980b9;
@@ -89,6 +90,7 @@
     display: flex;
     gap: 20px; /* Reducir el espacio entre los botones de envío */
     margin: 40px auto; /* Reducir el margen superior del contenedor de botones de envío */
+    border-radius: 40px;
 }
 
 .submit {
@@ -99,7 +101,7 @@
     height: 59px;
     color: #fff;
     background: #2980b9;
-    border-radius: 50px;
+    border-radius: 80px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;

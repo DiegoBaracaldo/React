@@ -4,6 +4,7 @@ import icon_lupa from "../../assets/lupa.png";
 import Diseños from "./Diseños";
 import Bodega from "./Bodega";
 import EditarPerfil from "./EditarPerfil"
+import Login from "../Login/LoginSignup"
 
 function Navegacion() {
   return (
@@ -19,10 +20,10 @@ function Navegacion() {
             <Link to="/Bodega">Bodega</Link>
           </li>
           <li>
-            <Link to= "/EditarPerfil"></Link>
+            <Link to= "/EditarPerfil">Editar Pefil</Link>
           </li>
           <li>
-            <a href="">Cerrar Sesion</a>
+            <Link to="/">Cerrar sesión</Link>
           </li>
         </ul>
         <form action="" className="buscador">
