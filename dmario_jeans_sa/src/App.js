@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./components/pages/Login/LoginSignup";
+import Login from "./components/pages/Login/login";
+import Signup from "./components/pages/Login/signup";
 import EditarPerfil from "./components/pages/MainInterface/EditarPerfil";
 import Bodega from "./components/pages/MainInterface/Bodega";
 import Diseños from "./components/pages/MainInterface/Diseños";
+import update_bodega from "./components/pages/MainInterface/update_bodega";
 import AuthRoute from "./components/pages/Login/AuthRoute"; 
 
 function App() {
@@ -15,7 +17,12 @@ function App() {
         <Route
           exact
           path="/"
-          element={<LoginPage isAuthenticated={isAuthenticated} />} 
+          element={<Login isAuthenticated={isAuthenticated} />} 
+        />
+        <Route
+          exact
+          path="/signup"
+          element={<Signup isAuthenticated={isAuthenticated} />} 
         />
         <AuthRoute
           exact
@@ -31,10 +38,11 @@ function App() {
         />
         <AuthRoute
           exact
-          path="/diseños"
+          path="/diseño"
           component={Diseños}
           isAuthenticated={isAuthenticated}
         />
+     
       </Routes>
     </Router>
   );

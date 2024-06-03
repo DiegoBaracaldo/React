@@ -1,0 +1,219 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px; /* Aumento del ancho en un 20% */
+    margin: auto;
+    padding: 36px; /* Aumento del padding en un 20% */
+}
+
+.titulo {
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Estilos de navegación */
+.navegacion {
+    font-size: 14px; /* Aumento del tamaño de fuente en un 20% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px; /* Aumento del margen superior en un 20% */
+    padding: 12px; /* Aumento del padding en un 20% */
+    text-align: center;
+    color: #ffff;
+}
+
+.listado {
+    font-size: 24px; /* Aumento del tamaño de fuente en un 20% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 48px; /* Aumento de la altura en un 20% */
+}
+
+.listado ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+.listado ul li {
+    margin-right: 36px; /* Aumento del margen derecho en un 20% */
+}
+
+.listado ul li a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+.listado ul li a:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.89);
+}
+
+/* Estilos de formulario y botones */
+.filtro,
+.filtro_ingreso {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Aumento del espacio entre elementos en un 20% */
+    padding: 12px; /* Aumento del padding en un 20% */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px; /* Aumento del radio de borde en un 20% */
+}
+
+.filtro label,
+.filtro select,
+.filtro button,
+.filtro_ingreso label,
+.filtro_ingreso select,
+.filtro_ingreso button {
+    margin-right: 8px; /* Aumento del margen derecho en un 20% */
+}
+
+.filtro input,
+.filtro select,
+.filtro button,
+.filtro_ingreso input,
+.filtro_ingreso select,
+.filtro_ingreso button {
+    flex: 1;
+    padding: 6px; /* Aumento del padding en un 20% */
+}
+
+.filtro button,
+.filtro_ingreso button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px; /* Aumento del padding en un 20% */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.filtro button img,
+.filtro_ingreso button img {
+    margin-right: 6px; /* Aumento del margen derecho en un 20% */
+}
+
+/* Estilos de resultados de búsqueda */
+.card {
+    width: 180%; /* Aumento del ancho en un 20% */
+    max-width: 271px; /* Aumento del ancho máximo en un 20% */
+    margin: 0 auto;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+}
+
+.col-auto {
+    display: flex;
+    align-items: center;
+}
+
+input[type="search"] {
+    flex: 1;
+    padding: 12px; /* Aumento del padding en un 20% */
+    font-size: 12px; /* Aumento del tamaño de fuente en un 20% */
+    margin-right: 18px; /* Aumento del margen derecho en un 20% */
+}
+
+.btn {
+    background-color: rgba(0, 162, 255, 0.658);
+    color: white;
+    font-size: 14px; /* Aumento del tamaño de fuente en un 20% */
+    padding: 12px 24px; /* Aumento del padding en un 20% */
+}
+
+.resultados {
+    margin-top: 24px; /* Aumento del margen superior en un 20% */
+}
+
+.resultados table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.resultados th,
+.resultados td {
+    border: 1px solid #ddd;
+    padding: 10px; /* Aumento del padding en un 20% */
+    text-align: left;
+}
+
+.resultados th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos adicionales */
+.edit-button,
+.submit,
+.crud {
+    display: inline-block;
+    padding: 12px 24px; /* Aumento del padding en un 20% */
+    color: white; /* Cambio del color del texto a blanco */
+    background-color: #f2f2f2;
+    text-align: center ;
+    text-decoration: none;
+    font-size: 16px ; /* Aumento del tamaño de fuente en un 20% */
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+}
+
+.edit-button {
+    background-color: rgba(0, 162, 255, 0.658);
+}
+
+.submit {
+    background-color: #008cba;
+}
+
+.submit2,
+.crud {
+    display: inline-block;
+    padding: 12px 24px; /* Aumento del padding en un 20% */
+    color:  rgb(179, 19, 19);
+    background-color: rgb(255, 22, 22);
+    color: white; /* Cambio del color del texto a blanco */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px; /* Aumento del tamaño de fuente en un 20% */
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+}
+
+.identificador {
+    text-align: center;
+}
+
+
+/* Estilos específicos de cada página */
+.bodega,
+.diseños,
+.editar-perfil {
+    margin-top: 24px; /* Aumento del margen superior en un 20% */
+}

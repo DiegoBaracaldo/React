@@ -1,43 +1,42 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+import '../../assets/css/Login.css'
 import { Link } from "react-router-dom";
-import icon_lupa from "../../assets/lupa.png";
-import Diseños from "./Diseños";
-import Bodega from "./Bodega";
-import EditarPerfil from "./EditarPerfil"
-import Login from "../Login/LoginSignup"
+import icon_lupa from "../../assets/img/lupa.png";
 
 function Navegacion() {
+  const navigate = useNavigate();
+
+  const handleCerrarSesion = () => {
+    // Eliminar datos de usuario del almacenamiento local
+    localStorage.removeItem("user_info");
+    // Redirigir al usuario a la página de inicio de sesión
+    navigate("/");
+  };
+
   return (
-    <div className="Navegacion">
-      <h2 className="titulo">D'mario Jean's</h2>
+    <div>
+      <div className="navegacion">
+        <h1>D'MARIO JEAN'S</h1>
+      </div>
       <br />
-      <nav className="navegadores">
+      <br />
+      <div className="listado">
         <ul>
           <li>
-            <Link to="/Diseños">Diseños</Link>
+            <button className="submit" onClick={() => navigate("/editar")}>Usuarios</button>
           </li>
           <li>
-            <Link to="/Bodega">Bodega</Link>
+            <button className="submit" onClick={() => navigate("/diseño")}>Diseños</button>
           </li>
           <li>
-            <Link to= "/EditarPerfil">Editar Pefil</Link>
+            <button className="submit" onClick={() => navigate("/bodega")}>Bodega</button>
           </li>
           <li>
-            <Link to="/">Cerrar sesión</Link>
+            <button className="submit" onClick={handleCerrarSesion}>Cerrar sesión</button>
           </li>
         </ul>
-        <form action="" className="buscador">
-          <img
-            src={icon_lupa}
-            alt="Icono de búsqueda"
-            style={{ width: "12px", height: "12px" }}
-          />
-          <input type="text" />
-          <button className="busqueda" type="submit">
-            Buscar
-          </button>
-        </form>
-      </nav>
+      </div>
     </div>
   );
 }

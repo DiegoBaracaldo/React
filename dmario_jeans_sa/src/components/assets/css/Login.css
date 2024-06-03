@@ -1,10 +1,8 @@
-
-
 .container {
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 100px; /* Reducir el margen superior del contenedor principal */
+    margin-top: 100px;
     width: 600px;
     background: white;
     padding-bottom: 30px;
@@ -15,7 +13,15 @@
     color: white;
     font-size: 35px;
     font-weight: bold;
-    margin-top: 10px; /* Reducir el margen superior del título */
+    margin-top: 10px;
+}
+
+.title-indicador {
+    text-align: center;
+    color: rgb(105, 194, 224);
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .header {
@@ -24,7 +30,7 @@
     align-items: center;
     gap: 9px;
     width: 100%;
-    margin-top: 10px; /* Reducir el margen superior de los elementos dentro de .header */
+    margin-top: 10px;
 }
 
 .text {
@@ -73,7 +79,7 @@
 
 .forgot-password {
     padding-left: 62px;
-    margin-top: 20px; /* Reducir el margen superior de la sección "olvidé mi contraseña" */
+    margin-top: 20px;
     color: black;
     font-size: 18px;
 }
@@ -88,8 +94,8 @@
 
 .submit-container {
     display: flex;
-    gap: 20px; /* Reducir el espacio entre los botones de envío */
-    margin: 40px auto; /* Reducir el margen superior del contenedor de botones de envío */
+    gap: 20px;
+    margin: 40px auto;
     border-radius: 40px;
 }
 
@@ -105,9 +111,21 @@
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.submit:hover {
+    transform: translateY(-5px);
 }
 
 .gray {
     background: #eaeaea;
     color: #676767;
+}
+
+.submit-container-navegacion {
+    display: flex;
+    gap: 9px;
+    margin: 10px auto;
+    border-radius: 50px;
 }

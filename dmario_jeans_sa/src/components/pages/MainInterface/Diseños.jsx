@@ -1,128 +1,108 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import { show_alerta } from './mainFunctions';
-
-/* Importaciones de links internos */ 
+import axios from 'axios';
 import Navegacion from './Navegacion';
-import icon_cod from "../../assets/codigo.png";
-import icon_diseñador from "../../assets/usuario.png";
-import icon_lupa from "../../assets/lupa.png";
-import descrip_icon from "../../assets/descripcion.png";
-import descarga_icon from "../../assets/descargar.png";
-import consultar_icon from "../../assets/consultar.png";
-import eliminar_icon from "../../assets/eliminar.png"; // Asegúrate de que este icono esté disponible
+import descarga_icon from "../../assets/img/descargar.png";
+import { Link } from 'react-router-dom';
 
-function Diseños() {
-    // URLs para APIs
-    const urlIngreso = 'http://localhost/prueba/APIs%20Android/diseño/save_diseño.php';
-    const urlFetch = 'http://localhost/prueba/APIs%20Android/diseño/fetch_diseño.php';
-
-    // Estados para métodos POST
-    const [nombre_diseño, setNombre_diseño] = useState('');
+const Diseños = () => {
+    const [nombreDiseño, setNombreDiseño] = useState('');
     const [codigo, setCodigo] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [archivo, setArchivo] = useState(null);
-
-    // Estados para métodos GET
-    const [datos, setDatos] = useState([]);
-    const [nombre_diseño_filtro, setNombre_diseñoFiltro] = useState('');
-    const [codigofiltro, setCodigoFiltro] = useState('');
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        getDiseño();
+        const fetchData = async () => {
+            try {
+                const result = await axios.get("http://localhost/prueba/APIs%20Android/diseño/fetch_diseño.php");
+                console.log('Datos recibidos:', result.data);
+                if (Array.isArray(result.data)) {
+                    setData(result.data);
+                } else {
+                    console.error('Datos recibidos no son un array:', result.data);
+                }
+            } catch (error) {
+                console.error('Error al obtener los datos:', error);
+            }
+        };
+        fetchData();
     }, []);
 
-    const getDiseño = async () => {
-        try {
-            const respuesta = await axios.get(urlFetch);
-            setDatos(respuesta.data);
-        } catch (error) {
-            console.error("Error al obtener los datos de la API", error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Hubo un error al obtener los datos de diseño'
-            });
-        }
-    }
-
-    const handleBuscar = () => {
-        // Filtra los datos según el filtro establecido
-        const datosFiltrados = datos.filter(dato => 
-            (!codigofiltro || dato.codigo === codigofiltro) && 
-            (!nombre_diseño_filtro || dato.nombre_diseño === nombre_diseño_filtro)
-        );
-        setDatos(datosFiltrados);
-    }
-
     const handleIngresar = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('nombre_diseño', nombre_diseño);
-            formData.append('codigo', codigo);
-            formData.append('descripcion', descripcion);
-            formData.append('archivo', archivo);
+        const formData = new FormData();
+        formData.append('nombre_diseño', nombreDiseño);
+        formData.append('codigo', codigo);
+        formData.append('descripcion', descripcion);
+        formData.append('archivo', archivo);
 
-            const respuesta = await axios.post(urlIngreso, formData, {
+        console.log('Datos a enviar:', formData);
+
+        try {
+            await axios.post("http://localhost/prueba/APIs%20Android/diseño/save_diseño.php", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
-                text: 'El diseño ha sido ingresado correctamente'
+                text: 'Datos ingresados correctamente'
             });
 
-            // Limpiar los campos
-            setNombre_diseño('');
+            const newItem = {
+                nombre_diseño: nombreDiseño,
+                codigo,
+                descripcion,
+                archivo: archivo ? archivo.name : '' // Guardamos solo el nombre del archivo
+            };
+
+            setData([...data, newItem]);
+
+            setNombreDiseño('');
             setCodigo('');
             setDescripcion('');
             setArchivo(null);
-
-            // Refrescar los datos
-            getDiseño();
-
         } catch (error) {
-            console.error("Error al ingresar el diseño", error);
+            console.error('Error al enviar la información:', error.response ? error.response.data : error.message);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al ingresar el diseño'
+                text: 'Error al registrar los datos'
             });
         }
-    }
+    };
 
-    const handleEditar = (id) => {
-        // Lógica para editar datos
-        // Aquí deberías implementar la lógica para editar un diseño
-    }
+    const handleEliminar = async (codigo) => {
+        console.log('Código a eliminar:', codigo);
 
-    const handleEliminar = async (id) => {
+        if (!/^[0-9]+$/.test(codigo)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El código debe contener solo números.'
+            });
+            return;
+        }
+
         try {
-            const respuesta = await axios.delete(`${urlFetch}?id=${id}`);
-
+            const response = await axios.delete(`http://localhost/prueba/APIs%20Android/diseño/delete_diseño.php?codigo=${codigo}`);
             Swal.fire({
                 icon: 'success',
-                title: 'Éxito',
-                text: 'El diseño ha sido eliminado correctamente'
+                title: 'Eliminado',
+                text: response.data.success
             });
 
-            // Refrescar los datos
-            getDiseño();
-
+            setData(data.filter(item => item.codigo !== codigo));
         } catch (error) {
-            console.error("Error al eliminar el diseño", error);
+            console.error('Error al eliminar la información:', error.response ? error.response.data : error.message);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al eliminar el diseño'
+                text: error.response ? error.response.data.error : 'Error al eliminar los datos'
             });
         }
-    }
+    };
 
     return (
         <div>
@@ -133,41 +113,46 @@ function Diseños() {
             <div className="container">
                 <div>
                     <h2 className='identificador'>DISEÑOS</h2>
-                    <br />
-                    <div className='ingreso'>
-                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div>
                     <h2 className='identificador'>INGRESAR DATOS</h2>
+                    <br />
+                    <br />
                     <div className="filtro_ingreso">
                         <label htmlFor="nombre_diseño">Diseño: </label>
                         <input
                             type="text"
                             id="nombre_diseño"
-                            value={nombre_diseño}
-                            onChange={(e) => setNombre_diseño(e.target.value)}
+                            value={nombreDiseño}
+                            onChange={(e) => setNombreDiseño(e.target.value)}
                         />
-                        <label htmlFor="codigo">Codigo:</label>
+                        <label htmlFor="codigo">Código:</label>
                         <input
-                            type="text"
+                            type="number"
                             id="codigo"
                             value={codigo}
                             onChange={(e) => setCodigo(e.target.value)}
                         />
                     </div>
                     <div className='filtro_ingreso'>
-                        <label htmlFor="descripcion">Descripcion:</label>
+                        <label htmlFor="descripcion">Descripción:</label>
                         <input
                             type="text"
                             id="descripcion"
                             value={descripcion}
                             onChange={(e) => setDescripcion(e.target.value)}
                         />
-
                         <label htmlFor="archivo">Archivo:</label>
                         <input
                             type="file"
                             id="archivo"
                             onChange={(e) => setArchivo(e.target.files[0])}
                         />
+                    </div>
+                    <div className="filtro_ingreso">
                         <button onClick={handleIngresar}>
                             <img src={descarga_icon} alt="Ingresar" style={{ width: '12px', height: '12px' }} />
                             Ingresar
@@ -177,58 +162,43 @@ function Diseños() {
                 <br />
                 <br />
                 <br />
-
                 <div className='consulta'>
-                    <h2 className='identificador'>CONSULTA DISEÑOS</h2>
-                    <div className="filtro">
-                        <label htmlFor="nombre_diseño_filtro">Diseño:</label>
-                        <input
-                            type="text"
-                            id="nombre_diseño_filtro"
-                            value={nombre_diseño_filtro}
-                            onChange={(e) => setNombre_diseñoFiltro(e.target.value)}
-                        />
-                        <label htmlFor="codigo_filtro">Codigo:</label>
-                        <input
-                            type="text"
-                            id="codigo_filtro"
-                            value={codigofiltro}
-                            onChange={(e) => setCodigoFiltro(e.target.value)}
-                        />
-                        <button onClick={handleBuscar}>
-                            <img src={icon_lupa} alt="Buscar" style={{ width: '12px', height: '12px' }} />
-                            Consultar
-                        </button>
-                    </div>
                     <div className="resultados">
                         <table>
-                            <thead>
+                            <thead className='identificador'>
                                 <tr>
-                                    <th>Nombre Diseño</th>
-                                    <th>Codigo</th>
-                                    <th>Descripcion</th>
-                                    <th>Archivo</th>
+                                    <td>Nombre Diseño</td>
+                                    <td>Código</td>
+                                    <td>Descripción</td>
+                                    <td>Archivo</td>
+                                    <td>Acciones</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                {datos.map((dato, index) => (
-                                    <tr key={index}>
-                                        <td>{dato.nombre_diseño}</td>
-                                        <td>{dato.codigo}</td>
-                                        <td>{dato.descripcion}</td>
-                                        <td>{dato.archivo}</td>
-                                        <td>
-                                            <button onClick={() => handleEditar(dato.id)}>
-                                                <img src={consultar_icon} alt="Editar" style={{ width: '12px', height: '12px' }} />
-                                                Editar
-                                            </button>
-                                            <button onClick={() => handleEliminar(dato.id)}>
-                                                <img src={eliminar_icon} alt="Eliminar" style={{ width: '12px', height: '12px' }} />
-                                                Eliminar
-                                            </button>
-                                        </td>
+                                {Array.isArray(data) && data.length > 0 ? (
+                                    data.map((item, index) => (
+                                        <tr key={index}>
+                                            <td>{item.nombre_diseño}</td>
+                                            <td>{item.codigo}</td>
+                                            <td>{item.descripcion}</td>
+                                            <td>
+                                                <a href={`http://localhost/prueba/APIs%20Android/diseño/files/${item.archivo}`} target="_blank" rel="noopener noreferrer">
+                                                    {item.archivo}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span onClick={() => handleEliminar(item.codigo)} className='crud'>Borrar</span>
+                                                <Link to={`update_diseño/${item.codigo}`}>
+                                                    <span className='edit-button'>Editar</span>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="5" className='identificador'>No hay datos disponibles</td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
                     </div>

@@ -1,55 +1,59 @@
-// EditarPerfil.jsx
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import Navegacion from './Navegacion';
-import './estilos.css'; 
-import icon_user from '../../assets/usuario.png';
-import icon_id from '../../assets/id.png';
-import icon_telefono from '../../assets/telefono.png';
-import icon_password from '../../assets/bloquear.png';
-
+import '../../assets/css/estilos.css';
+import icon_user from '../../assets/img/usuario.png';
+import icon_telefono from '../../assets/img/telefono.png';
+import editar_icon from '../../assets/img/editar.png';
+import guardar_icon from '../../assets/img/guardar.png';
 
 const EditarPerfil = () => {
+    const [usuarios, setUsuarios] = useState([]);
+    const [editMode, setEditMode] = useState(null);
     const [nombre, setNombre] = useState('');
-    const [identificacion, setIdentificacion] = useState('');
     const [telefono, setTelefono] = useState('');
-    const [password, setPassword] = useState('');
-    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost/prueba/APIs%20Android/usuario/fetch_usuario.php')
-            .then(response => {
-                const data = response.data;
-                setNombre(data.nombre);
-                setIdentificacion(data.identificacion);
-                setTelefono(data.telefono);
-                setPassword(data.password);
-            })
-            .catch(error => {
-                console.error('Error al obtener perfil:', error);
-            });
+        const fetchUsuarios = async () => {
+            try {
+                const result = await axios.get('http://localhost/prueba/APIs%20Android/usuario/list_usuario.php');
+                setUsuarios(result.data);
+            } catch (error) {
+                console.error('Error al obtener los usuarios:', error);
+            }
+        };
+        fetchUsuarios();
     }, []);
 
-    const handleEdit = () => {
-        setEditMode(true);
+    const handleEdit = (usuario) => {
+        setEditMode(usuario.identificacion);
+        setNombre(usuario.nombre);
+        setTelefono(usuario.telefono);
     };
 
-    const handleSave = () => {
-        // Lógica para guardar los cambios
-        axios.put('http://localhost/prueba/APIs%20Android/usuario/edit_usuario.php', {
-            nombre: nombre,
-            identificacion: identificacion,
-            telefono: telefono,
-            password: password
-        })
-            .then(response => {
-                console.log('Perfil actualizado correctamente');
-                setEditMode(false); // Desactivar modo de edición
-            })
-            .catch(error => {
-                console.error('Error al actualizar perfil:', error);
+    const handleSave = async (identificacion) => {
+        try {
+            await axios.put('http://localhost/prueba/APIs%20Android/usuario/edit_usuario.php', {
+                identificacion,
+                nombre,
+                telefono
             });
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Perfil actualizado correctamente'
+            });
+            setUsuarios(usuarios.map(user => user.identificacion === identificacion ? { ...user, nombre, telefono } : user));
+            setEditMode(null);
+        } catch (error) {
+            console.error('Error al actualizar perfil:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al actualizar perfil'
+            });
+        }
     };
 
     return (
@@ -59,65 +63,63 @@ const EditarPerfil = () => {
             <br />
             <br />
             <div className="container">
-                <Navegacion />
-                <div className='inputs'>
-                    <div className="input">
-                        <img src={icon_user} alt="" style={{ width: "14px", height: "14px" }} />
-                        <input
-                            type="text"
-                            placeholder="Nombre"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            disabled={!editMode} // Deshabilitar input en modo de visualización
-                        />
-                        {!editMode && (
-                            <button className="edit-button" onClick={handleEdit}>Editar</button>
-                        )}
+                <h2 className='identificador'>Usuarios activos</h2>
+                <br />
+                <div className='consulta'>
+                    <div className="resultados">
+                        <table>
+                            <thead className='identificador'>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Identificación</td>
+                                    <td>Teléfono</td>
+                                    <td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {usuarios.map((usuario, index) => (
+                                    <tr key={index}>
+                                        <td>
+                                            {editMode === usuario.identificacion ? (
+                                                <input
+                                                    type="text"
+                                                    value={nombre}
+                                                    onChange={(e) => setNombre(e.target.value)}
+                                                />
+                                            ) : (
+                                                usuario.nombre
+                                            )}
+                                        </td>
+                                        <td>{usuario.identificacion}</td>
+                                        <td>
+                                            {editMode === usuario.identificacion ? (
+                                                <input
+                                                    type="text"
+                                                    value={telefono}
+                                                    onChange={(e) => setTelefono(e.target.value)}
+                                                />
+                                            ) : (
+                                                usuario.telefono
+                                            )}
+                                        </td>
+                                        <td>
+                                            {editMode === usuario.identificacion ? (
+                                                <button className="edit-button" onClick={() => handleSave(usuario.identificacion)}>
+                                                    <img src={guardar_icon} alt="Guardar" style={{ width: '12px', height: '12px' }} />
+                                                    Guardar
+                                                </button>
+                                            ) : (
+                                                <button className="edit-button" onClick={() => handleEdit(usuario)}>
+                                                    <img src={editar_icon} alt="Editar" style={{ width: '12px', height: '12px' }} />
+                                                    Editar
+                                                </button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                    <div className="input">
-                        <img src={icon_id} alt="" style={{ width: "14px", height: "14px" }} />
-                        <input
-                            type="text"
-                            placeholder="Identificación"
-                            value={identificacion}
-                            onChange={(e) => setIdentificacion(e.target.value)}
-                            disabled={!editMode} // Deshabilitar input en modo de visualización
-                        />
-                        {!editMode && (
-                            <button className="edit-button" onClick={handleEdit}>Editar</button>
-                        )}
-                    </div>
-                    <div className="input">
-                        <img src={icon_telefono} alt="" style={{ width: "14px", height: "14px" }} />
-                        <input
-                            type="text"
-                            placeholder="Teléfono"
-                            value={telefono}
-                            onChange={(e) => setTelefono(e.target.value)}
-                            disabled={!editMode} // Deshabilitar input en modo de visualización
-                        />
-                        {!editMode && (
-                            <button className="edit-button" onClick={handleEdit}>Editar</button>
-                        )}
-                    </div>
-                    <div className="input">
-                        <img src={icon_password} alt="" style={{ width: "14px", height: "14px" }} />
-                        <input
-                            type="password"
-                            placeholder="Contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            disabled={!editMode} // Deshabilitar input en modo de visualización
-                        />
-                        {!editMode && (
-                            <button className="edit-button" onClick={handleEdit}>Editar</button>
-                        )}
-                    </div>
-                    {editMode && (
-                        <div className="submit-container">
-                            <button className="submit" onClick={handleSave}>Guardar</button>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
